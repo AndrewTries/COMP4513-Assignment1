@@ -1,0 +1,5 @@
+
+./info/
+info/*
+!info/database-schema.png
+data/
