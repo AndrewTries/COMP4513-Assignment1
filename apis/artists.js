@@ -9,7 +9,7 @@ app.get('/api/artists', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
     data.slice(0, 1).forEach((d) => console.log(d));
-    res.send(data);
+    return res.send(data);
 });
 
 app.get('/api/artists/:ref', async (req, res) => {
@@ -21,8 +21,9 @@ app.get('/api/artists/:ref', async (req, res) => {
         console.error('Error fetching data:', error);
         return res.status(500).json({ error: error.message });
     }
+    if (data.length < 1) res.status(500).json({ error: 'Requested results not found.' });
     data.slice(0, 1).forEach((d) => console.log(d));
-    res.json(data);
+    return res.json(data);
 });
 
 app.get('/api/artists/search/:substring', async (req, res) => {
@@ -34,8 +35,9 @@ app.get('/api/artists/search/:substring', async (req, res) => {
         console.error('Error fetching data:', error);
         return res.status(500).json({ error: error.message });
     }
+    if (data.length < 1) res.status(500).json({ error: 'Requested results not found.' });
     data.slice(0, 1).forEach((d) => console.log(d));
-    res.json(data);
+    return res.json(data);
 });
 
 app.get('/api/artists/country/:substring', async (req, res) => {
@@ -47,6 +49,7 @@ app.get('/api/artists/country/:substring', async (req, res) => {
         console.error('Error fetching data:', error);
         return res.status(500).json({ error: error.message });
     }
+    if (data.length < 1) res.status(500).json({ error: 'Requested results not found.' });
     data.slice(0, 1).forEach((d) => console.log(d));
-    res.json(data);
+    return res.json(data);
 });

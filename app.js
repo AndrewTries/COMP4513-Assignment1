@@ -21,11 +21,12 @@ require('./apis/artists');
 require('./apis/galleries');
 require('./apis/genres');
 require('./apis/paintings');
+require('./apis/counts');
 
 app.listen(port, (err) => {
     if (err) {
         if (err.code === 'EADDRINUSE') {
-            console.error(`Port ${PORT} is already in use.`);
+            console.error(`Port ${port} is already in use.`);
         } else {
             console.error('Server failed to start:', err);
         }
