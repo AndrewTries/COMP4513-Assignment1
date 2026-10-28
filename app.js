@@ -2,7 +2,11 @@ const express = require('express');
 const supa = require('@supabase/supabase-js');
 const process = require('node:process');
 
-process.loadEnvFile();
+const fs = require('fs');
+
+if (fs.existsSync('.env')) {
+    process.loadEnvFile();
+}
 
 const app = express();
 const supaUrl = process.env.SUPABASE_URL;
