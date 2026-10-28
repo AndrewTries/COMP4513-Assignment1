@@ -18,6 +18,7 @@ app.get('/api/paintings/sort/:type/limit/:ref', async (req, res) => {
     var field = '';
     if (req.params.type === 'year') field = 'yearOfWork';
     else if (req.params.type === 'title') field = 'title';
+    //TODO do I add a specific error for incorrect field ?
     const limit = Number(req.params.ref) == 0 ? 1000 : Number(req.params.ref)
     const { data, error } = await supabase
         .from('paintings')
