@@ -1,5 +1,6 @@
 const { app, supabase } = require('../app');
 
+// Returns just the specified painting, e.g., /api/paintings/single/63
 app.get('/api/paintings/single/:ref', async (req, res) => {
     const { data, error } = await supabase
         .from('paintings')
@@ -14,6 +15,10 @@ app.get('/api/paintings/single/:ref', async (req, res) => {
     return res.json(data);
 });
 
+// Returns paintings sorted (lowest to highest) by either title or yearOfWork. 
+// For this and the following paintings requests, The number of paintings returned is specified by ref, 
+// e.g., the following returns the first 12 paintings: /api/paintings/sort/year/limit/12 
+// If limit is 0, then the api returns all the paintings.
 app.get('/api/paintings/sort/:type/limit/:ref', async (req, res) => {
     var field = '';
     if (req.params.type === 'year') field = 'yearOfWork';
@@ -38,6 +43,8 @@ app.get('/api/paintings/sort/:type/limit/:ref', async (req, res) => {
     return res.json(data);
 });
 
+// Same as previous API, except, instead of returning the first paintings, skip the records specified by ref2, 
+// e.g., the following returns paintings 31-40 /api/paintings/sort/year/limit/10/skip/30
 app.get('/api/paintings/sort/:type/limit/:ref/skip/:ref2', async (req, res) => {
     var field = '';
     if (req.params.type === 'year') field = 'yearOfWork';

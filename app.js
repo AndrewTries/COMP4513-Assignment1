@@ -4,6 +4,8 @@ const process = require('node:process');
 
 const fs = require('fs');
 
+// Escapes .env file load if using render because .env file is not in git repo
+// Uses render environment variables instead 
 if (fs.existsSync('.env')) {
     process.loadEnvFile();
 }
@@ -16,6 +18,7 @@ const supabase = supa.createClient(supaUrl, supaPubKey);
 
 module.exports = { app, supabase };
 
+// importing all apis
 require('./apis/eras');
 require('./apis/artists');
 require('./apis/galleries');
