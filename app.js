@@ -22,6 +22,7 @@ require('./apis/galleries');
 require('./apis/genres');
 require('./apis/paintings');
 require('./apis/counts');
+require('./apis/default');
 
 app.listen(port, (err) => {
     if (err) {

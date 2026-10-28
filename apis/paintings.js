@@ -18,8 +18,8 @@ app.get('/api/paintings/sort/:type/limit/:ref', async (req, res) => {
     var field = '';
     if (req.params.type === 'year') field = 'yearOfWork';
     else if (req.params.type === 'title') field = 'title';
-    //TODO do I add a specific error for incorrect field ?
-    const limit = Number(req.params.ref) == 0 ? 1000 : Number(req.params.ref)
+    const limit = req.params.ref === null || req.params.ref === '0' ? 1000 : req.params.ref;
+    if (isNaN(limit) || isNaN(parseFloat(limit))) return res.status(500).json({ error: 'Limit is not a number.' });
     const { data, error } = await supabase
         .from('paintings')
         .select(`
@@ -42,7 +42,11 @@ app.get('/api/paintings/sort/:type/limit/:ref/skip/:ref2', async (req, res) => {
     var field = '';
     if (req.params.type === 'year') field = 'yearOfWork';
     else if (req.params.type === 'title') field = 'title';
-    const limit = Number(req.params.ref) == 0 ? 1000 : Number(req.params.ref)
+    const limit = req.params.ref === '0' ? 1000 : req.params.ref;
+    console.log('LIMIT', limit);
+    // if (req.params.ref2 === null) req.params.ref2 = 0;
+    if (isNaN(limit) || isNaN(parseFloat(limit))) return res.status(500).json({ error: 'Limit is not a number.' });
+    if (isNaN(req.params.ref2) || isNaN(parseFloat(req.params.ref2))) return res.status(500).json({ error: 'Skip is not a number.' });
     const { data, error } = await supabase
         .from('paintings')
         .select(`
@@ -50,7 +54,7 @@ app.get('/api/paintings/sort/:type/limit/:ref/skip/:ref2', async (req, res) => {
             artists(*),
             galleries(*)                    
         `)
-        .range(Number(req.params.ref2), Number(req.params.ref2) + limit - 1)
+        .range(Number(req.params.ref2), Number(req.params.ref2) + Number(limit) - 1)
         .order(field, { ascending: true });
     if (error) {
         console.error('Error fetching data:', error);
@@ -87,6 +91,7 @@ app.get('/api/paintings/search/:substring', async (req, res) => {
 });
 
 app.get('/api/paintings/years/:start/:end', async (req, res) => {
+    if (req.params.start > req.params.end) res.status(500).json({ error: 'Ending year earlier than starting year.' });
     const { data, error } = await supabase
         .from('paintings')
         .select()
