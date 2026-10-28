@@ -17,8 +17,7 @@ This is a project containing APIs for artist data - artists, eras, galleries, ge
 | API Endpoint | Description | Test Links |
 | --- | --- | --- |
 | `/api/eras` | Returns all the eras | [/api/eras](https://comp4513-assignment1-4lpi.onrender.com/api/eras) |
-| `/api/galleries` | Returns all the galleries (for this, and other gallery 
-requests, the apis return all the fields in the galleries table) | [/api/galleries](https://comp4513-assignment1-4lpi.onrender.com/api/galleries) |
+| `/api/galleries` | Returns all the galleries (for this, and other gallery requests, the apis return all the fields in the galleries table) | [/api/galleries](https://comp4513-assignment1-4lpi.onrender.com/api/galleries) |
 | `/api/galleries/ref` | Returns just the specified gallery e.g., `/api/galleries/30` | [/api/galleries/30](https://comp4513-assignment1-4lpi.onrender.com/api/galleries/30) <br> [/api/galleries/calgary](https://comp4513-assignment1-4lpi.onrender.com/api/galleries/calgary) |
 | `/api/galleries/country/substring` | Returns the galleries whose galleryCountry (case insensitive) begins with the provided substring, e.g., `/api/galleries/country/fra` | [/api/galleries/country/fra](https://comp4513-assignment1-4lpi.onrender.com/api/galleries/country/fra) |
 | `/api/artists` | Returns all the artists (for this, and other artist requests, the apis return all the fields in the artists table) | [/api/artists](https://comp4513-assignment1-4lpi.onrender.com/api/artists) |
