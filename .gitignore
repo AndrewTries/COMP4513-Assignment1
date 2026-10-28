@@ -3,3 +3,5 @@
 info/*
 !info/database-schema.png
 data/
+.env
+node_modules/

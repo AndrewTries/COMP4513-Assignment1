@@ -39,3 +39,8 @@ This is a project containing APIs for artist data - artists, eras, galleries, ge
 | `/api/counts/genres` | Returns the genre name and the number of paintings for each genre, sorted by the number of paintings (fewest to most). | [/api/counts/genres](https://comp4513-assignment1-4lpi.onrender.com/api/counts/genres) |
 | `/api/counts/artists` | Returns the artist name (first name space last name) and the number of paintings for each artist, sorted by the number of paintings (most to fewest). | [/api/counts/artists](https://comp4513-assignment1-4lpi.onrender.com/api/counts/artists) |
 | `/api/counts/topgenres/ref` | Returns the genre name and the number of paintings for each genre, sorted by the number of paintings (most to least) for genres having over some set number of paintings, e.g., `/api/counts/topgenres/20` would show the painting counts for those genres with more than 20 paintings. | [/api/counts/topgenres/20](https://comp4513-assignment1-4lpi.onrender.com/api/counts/topgenres/20) [/api/counts/topgenres/2034958](https://onrender.com) |
+
+## Running the API's
+npm init
+npm install express
+npm install @supabase/supabase-js 
