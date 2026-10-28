@@ -1,5 +1,6 @@
 const { app, supabase } = require('../app');
 
+// Returns all the artists (for this, and other artist requests, the apis return all the fields in the artists table)
 app.get('/api/artists', async (req, res) => {
     const { data, error } = await supabase
         .from('artists')
@@ -12,6 +13,7 @@ app.get('/api/artists', async (req, res) => {
     return res.send(data);
 });
 
+// Returns just the specified artist, e.g., /api/artists/12
 app.get('/api/artists/:ref', async (req, res) => {
     const { data, error } = await supabase
         .from('artists')
@@ -26,6 +28,7 @@ app.get('/api/artists/:ref', async (req, res) => {
     return res.json(data);
 });
 
+// Returns the artists whose last name (case insensitive) begins with the provided substring, e.g., /api/artist/search/ma
 app.get('/api/artists/search/:substring', async (req, res) => {
     const { data, error } = await supabase
         .from('artists')
@@ -40,6 +43,7 @@ app.get('/api/artists/search/:substring', async (req, res) => {
     return res.json(data);
 });
 
+// Returns the artists whose nationality (case insensitive) begins with the provided substring, e.g., /api/artists/country/fra
 app.get('/api/artists/country/:substring', async (req, res) => {
     const { data, error } = await supabase
         .from('artists')

@@ -83,6 +83,8 @@ app.get('/api/paintings/sort/:type/limit/:ref/skip/:ref2', async (req, res) => {
     return res.json(data);
 });
 
+// Returns the paintings whose title (case insensitive) contains the provided substring (sorted by year), 
+// e.g., /api/paintings/search/port
 app.get('/api/paintings/search/:substring', async (req, res) => {
     const { data, error } = await supabase
         .from('paintings')
@@ -97,6 +99,8 @@ app.get('/api/paintings/search/:substring', async (req, res) => {
     return res.json(data);
 });
 
+// Returns the paintings between two years (include the paintings in the provided years), sorted by year, 
+// e.g., /api/paintings/years/1800/1850
 app.get('/api/paintings/years/:start/:end', async (req, res) => {
     if (req.params.start > req.params.end) res.status(500).json({ error: 'Ending year earlier than starting year.' });
     const { data, error } = await supabase
@@ -114,6 +118,7 @@ app.get('/api/paintings/years/:start/:end', async (req, res) => {
     return res.json(data);
 });
 
+// Returns all the paintings in a given gallery, sorted by year, e.g., /api/paintings/galleries/5
 app.get('/api/paintings/galleries/:ref', async (req, res) => {
     const { data, error } = await supabase
         .from('paintings')
@@ -129,6 +134,7 @@ app.get('/api/paintings/galleries/:ref', async (req, res) => {
     return res.json(data);
 });
 
+// Returns all the paintings by a given artist, sorted by year, e.g., /api/paintings/artist/16
 app.get('/api/paintings/artist/:ref', async (req, res) => {
     const { data, error } = await supabase
         .from('paintings')
@@ -144,6 +150,7 @@ app.get('/api/paintings/artist/:ref', async (req, res) => {
     return res.json(data);
 });
 
+// Returns all the paintings for a given genre, e.g., /api/paintings/genre/78 Sorted by yearOfWork.
 app.get('/api/paintings/genre/:ref', async (req, res) => {
     const { data, error } = await supabase
         .from('paintings')
@@ -159,6 +166,7 @@ app.get('/api/paintings/genre/:ref', async (req, res) => {
     return res.json(data);
 });
 
+// Returns all the paintings for a given era, e.g., /api/paintings/era/2 Sorted by yearOfWork.
 app.get('/api/paintings/era/:ref', async (req, res) => {
     const { data, error } = await supabase
         .from('paintings')

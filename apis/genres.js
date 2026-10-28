@@ -1,5 +1,6 @@
 const { app, supabase } = require('../app');
 
+// Returns all the genres. For this and the following genres requests, the apis also provide all the era fields
 app.get('/api/genres', async (req, res) => {
     const { data, error } = await supabase
         .from('genres')
@@ -14,6 +15,7 @@ app.get('/api/genres', async (req, res) => {
     return res.json(data);
 });
 
+// Returns just the specified genre, e.g., /api/genres/76
 app.get('/api/genres/:ref', async (req, res) => {
     const { data, error } = await supabase
         .from('genres')
@@ -30,22 +32,7 @@ app.get('/api/genres/:ref', async (req, res) => {
     return res.json(data);
 });
 
-// app.get('/api/genres/painting/:ref', async (req, res) => {
-//     const { data, error } = await supabase
-//         .from('genres')
-//         .select(` 
-//             *, eras (*), 
-//             paintinggenres ()
-//         `)
-//         .eq('paintinggenres.paintingId', req.params.ref);
-//     if (error) {
-//         console.error('Error fetching data:', error);
-//         return res.status(500).json({ error: error.message });
-//     }
-//     data.slice(0, 1).forEach((d) => console.log(d));
-//     res.json(data);
-// });
-
+// Returns the genres used in a given painting (ordered by genreName in ascending order), e.g., /api/genres/painting/408
 app.get('/api/genres/painting/:ref', async (req, res) => {
     const { data, error } = await supabase
         .from('paintinggenres')

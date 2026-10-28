@@ -1,5 +1,6 @@
 const { app, supabase } = require('../app');
 
+// 	Returns all the eras
 app.get('/api/eras', async (req, res) => {
     const { data, error } = await supabase
         .from('eras')
